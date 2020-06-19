@@ -18,6 +18,12 @@
     <!--这里的子模块中，就不需要再写依赖的版本，因为父工程中已经写过了，这里只需要引用一下即可-->
     <dependencies>
 
+        <dependency>
+            <groupId>com.kaishu</groupId>
+            <artifactId>service_base</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
 <!--        <dependency>-->
 <!--            <groupId>com.kaishu</groupId>-->
 <!--            <artifactId>service_base</artifactId>-->

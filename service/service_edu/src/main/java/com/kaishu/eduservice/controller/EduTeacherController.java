@@ -2,12 +2,10 @@ package com.kaishu.eduservice.controller;
 
 import com.kaishu.eduservice.entity.EduTeacher;
 import com.kaishu.eduservice.service.impl.EduTeacherServiceImpl;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,7 +18,8 @@ import java.util.List;
  * @since 2020-06-19
  */
 @RestController
-@RequestMapping("/eduservice/edu-teacher")
+@RequestMapping("/eduservice/teacher")
+@Api(description = "讲师管理模块")
 public class EduTeacherController {
 
     //查询讲师表所有信息
@@ -30,7 +29,7 @@ public class EduTeacherController {
     private EduTeacherServiceImpl eduTeacherService; //service类中中自动注入了baseMapper，所以service也具有了mapper的功能。使用service也可以查询数据库
 
     //rest风格
-//    @ApiOperation(value = "所有讲师列表")
+    @ApiOperation(value = "所有讲师列表")
     @GetMapping("findAll")
     public List<EduTeacher> findAll() {
         List<EduTeacher> list = eduTeacherService.list(null);
@@ -40,17 +39,18 @@ public class EduTeacherController {
     /**
      * 删除操作，id值需要传递
      */
-//    @ApiOperation(value = "删除指定讲师")
-//    @DeleteMapping("{id}")
-//    public R deleteTeacher(@ApiParam(name = "id", value = "讲师id", required = true) @PathVariable String id) {
-//
-//        boolean flag = eduTeacherService.removeById(id);
+    @ApiOperation(value = "删除指定讲师")
+    @DeleteMapping("{id}")
+    public boolean deleteTeacher( @PathVariable String id) {  //@ApiParam(name = "id", value = "讲师id", required = true)
+
+        boolean flag = eduTeacherService.removeById(id);
 //        if (flag) {
 //            return R.ok();
 //        } else {
 //            return R.error();
 //        }
-//    }
+        return flag;
+    }
 
 }
 
