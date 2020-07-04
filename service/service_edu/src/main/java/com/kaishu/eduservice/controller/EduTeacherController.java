@@ -6,6 +6,7 @@ import com.kaishu.commonutils.R;
 import com.kaishu.eduservice.entity.EduTeacher;
 import com.kaishu.eduservice.entity.vo.TeacherQuery;
 import com.kaishu.eduservice.service.impl.EduTeacherServiceImpl;
+import com.kaishu.servicebase.exceptionhandler.GuliException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -168,7 +169,13 @@ public class EduTeacherController {
     public R getTeacher(@PathVariable String id) {
         EduTeacher teacher = eduTeacherService.getById(id);
 
-        int i = 10/0;
+        try {
+            int i = 10 / 0;
+        } catch (Exception e) {   //这里还是要写Exception
+            //执行自定义异常 【我们自定义的异常，系统不会手动抛出】
+            throw new GuliException(20001,"执行了自定义异常...");
+        }
+
 
         return R.ok().data("teacher", teacher);
     }
